@@ -23,28 +23,28 @@ import dot_env/env
 import gleam/io
 
 pub fn main() {
-    dot.new()
-    |> dot.set_path("path/to/.env")
-    |> dot.set_debug(False)
-    |> dot.load
+  dot.new()
+  |> dot.set_path("path/to/.env")
+  |> dot.set_debug(False)
+  |> dot.load
 
-    // or dot_env.load_with_opts(dot_env.Opts(path: "path/to/.env", debug: False, capitalize: False))
-    // or `dot_env.load_default()` to load the `.env` file in the root path
+  // or dot_env.load_with_opts(dot_env.Opts(path: "path/to/.env", debug: False, capitalize: False))
+  // or `dot_env.load_default()` to load the `.env` file in the root path
 
-    case env.get("MY_ENV_VAR") {
-        Ok(value) -> io.println(value)
-        Error(_) -> io.println("something went wrong")
-    }
+  case env.get_string("MY_ENV_VAR") {
+    Ok(value) -> io.println(value)
+    Error(_) -> io.println("something went wrong")
+  }
 
-    let app_name = env.get_or("APP_NAME", "my app name")
-    let port = env.get_int_or("PORT", 3000)
-    let enable_signup = env.get_bool_or("ENABLE_SIGNUP", True)
+  let app_name = env.get_string_or("APP_NAME", "my app name")
+  let port = env.get_int_or("PORT", 3000)
+  let enable_signup = env.get_bool_or("ENABLE_SIGNUP", True)
 
-    io.debug(app_name)
-    io.debug(port)
-    io.debug(enable_signup)
+  echo app_name
+  echo port
+  echo enable_signup
 
-    Nil
+  Nil
 }
 ```
 
